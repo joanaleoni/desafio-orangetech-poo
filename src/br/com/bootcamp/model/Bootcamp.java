@@ -1,5 +1,6 @@
 package br.com.bootcamp.model;
 
+import br.com.bootcamp.utils.DateUtils;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -94,17 +95,26 @@ public class Bootcamp {
         sb.append("ID: ").append(id).append("\n");
         sb.append("Nome: ").append(nome).append("\n");
         sb.append("Descrição: ").append(descricao).append("\n");
+        sb.append("Data inicial: ").append(dataInicial.format(DateUtils.FORMATTER)).append("\n");
+        sb.append("Data final: ").append(dataFinal.format(DateUtils.FORMATTER)).append("\n");
         
-        sb.append("Devs inscritos: ").append("\n");
-        for (Dev dev : this.devsInscritos) {
-            sb.append(dev.getNome()).append("\n");
-        }
+        sb.append("\n-- Devs inscritos --").append("\n");        
+        if(this.devsInscritos.size() == 0){
+            sb.append("Ainda não há devs inscritos").append("\n");
+        } else {            
+            for (Dev dev : this.devsInscritos) {
+                sb.append(dev.getNome()).append("\n");
+            }
+        }        
 
-        sb.append("Conteúdos: ").append("\n");
-
-        for (Conteudo c: this.conteudos) {
-            sb.append(c.getTitulo()).append("\n");
-        }
+        sb.append("\n-- Conteúdos --").append("\n");
+        if(this.conteudos.size() == 0){
+            sb.append("Ainda não há conteúdos cadastrados").append("\n");
+        } else {
+            for (Conteudo c: this.conteudos) {
+                sb.append(c.getTitulo()).append("\n");
+            }
+        }        
 
         return sb.toString();
     }
