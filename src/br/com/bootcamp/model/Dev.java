@@ -71,12 +71,18 @@ public class Dev {
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
         bootcamp.getDevsInscritos().add(this);
     }
+    
+    public void concluirBootcamp(Bootcamp bootcamp){
+        if(this.conteudosConcluidos.containsAll(bootcamp.getConteudos())){
+            bootcamp.getDevsInscritos().remove(this);
+        } 
+    }
 
     public void progredir() {
         Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
-        if(conteudo.isPresent()) {
+        if (conteudo.isPresent()) {
             this.conteudosConcluidos.add(conteudo.get());
-            this.conteudosInscritos.remove(conteudo.get());
+            this.conteudosInscritos.remove(conteudo.get());            
         } else {
             System.err.println("Você não está matriculado/a em nenhum conteúdo");
         }
@@ -94,17 +100,26 @@ public class Dev {
         StringBuilder sb = new StringBuilder();
         sb.append("ID: ").append(id).append("\n");
         sb.append("Nome: ").append(nome).append("\n");
-        sb.append("Conteúdos inscritos: ").append("\n");
-        for (Conteudo ci : this.conteudosInscritos) {
-            sb.append(ci.getTitulo()).append("\n");
+        sb.append("XP: ").append(this.calcularTotalXP()).append("\n");
+
+        sb.append("\n-- Conteúdos inscritos --").append("\n");
+        if (this.conteudosInscritos.size() == 0) {
+            sb.append(this.nome + " não está inscrito/a em nenhum conteúdo no momento.").append("\n");
+        } else {
+            for (Conteudo ci : this.conteudosInscritos) {
+                sb.append(ci.getTitulo()).append("\n");
+            }
         }
 
-        sb.append("Conteúdos concluídos: ").append("\n");
-
-        for (Conteudo cc : this.conteudosConcluidos) {
-            sb.append(cc.getTitulo()).append("\n");
+        sb.append("\n-- Conteúdos concluídos --").append("\n");
+        if (this.conteudosConcluidos.size() == 0) {
+            sb.append(this.nome + " ainda não concluiu nenhum conteúdo.").append("\n");
+        } else {
+            for (Conteudo cc : this.conteudosConcluidos) {
+                sb.append(cc.getTitulo()).append("\n");
+            }
         }
-
+        
         return sb.toString();
     }
 }
