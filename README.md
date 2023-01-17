@@ -1,4 +1,4 @@
-# :orange: Desafio Orange Tech+ Backend | Bootcamp
+# :orange: Desafio POO | Orange Tech+ Backend
 
 <img src='https://user-images.githubusercontent.com/77423877/212558607-73d3c606-94ad-41bd-b0e6-2b666752c02e.png' width=300 align='left'>
 
